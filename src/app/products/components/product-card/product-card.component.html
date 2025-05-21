@@ -1,0 +1,22 @@
+<div class="card bg-base-100 w-96 shadow-sm">
+  <figure [routerLink]="['/product', product().slug]" routerLinkActive="btn btn-primary">
+    <img
+      [src]="imageUrl()"
+      [alt]="product().title" />
+  </figure>
+  <div class="card-body">
+
+    <a [routerLink]="['/product', product().slug]" routerLinkActive="btn btn-primary" class="card-title hover:underline">
+
+      <h2>
+      {{product().title}}
+    </h2>
+
+  </a>
+
+    <p> {{product().description | slice: 0:70 }}... </p>
+    <div class="card-actions justify-end">
+      <a [routerLink]="['/product', product().slug]" routerLinkActive="btn btn-primary">Ver mas+</a>
+    </div>
+  </div>
+</div>
