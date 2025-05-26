@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product, ProductsResponse } from '../interfaces/products.interface';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
@@ -18,6 +18,9 @@ interface Options{
 export class ProductService {
 
   private  http = inject(HttpClient);
+  private productsCache = new Map<string, ProductsResponse>();
+  private productCache = new Map<string, Product>();
+
 
   getImageProdcut(images: string):Observable<ProductsResponse>{
     return this.http.get<ProductsResponse>(`${baseUrl}/files/product/${images}`)
@@ -27,6 +30,8 @@ export class ProductService {
   getProduct(options:Options):Observable<ProductsResponse>{
 
     const { limit = 9, offset = 0, gender = ''} = options;
+    const key = `${limit}-${offset}-${gender}`;
+    if(this.productsCache.has(key)){ return of(this.productsCache.get(key)!)}
 
     return this.http.get<ProductsResponse>(`${baseUrl}/products`, {
       params: {
@@ -36,13 +41,25 @@ export class ProductService {
       },
     })
     .pipe(
-      tap((resp)=> console.log(resp))
+      tap((resp)=> console.log(resp)),
+      tap((resp)=> this.productsCache.set(key, resp)),
     );
   }
 
 
   getProductByIdSlug(idSlug: string):Observable<Product>{
+
+    if(this.productCache.has(idSlug)){
+      return of(this.productCache.get(idSlug)!)}
+
+
+
+
+
     return this.http.get<Product>(`${baseUrl}/products/${idSlug}`)
+    .pipe(
+      tap((product)=> this.productCache.set(idSlug, product))
+    );
   }
 
 

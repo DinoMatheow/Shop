@@ -3,8 +3,8 @@ import { ProductService } from '@/products/services/products.service';
   import { rxResource } from '@angular/core/rxjs-interop';
 import { ProductCardComponent } from '@/products/components/product-card/product-card.component';
 import { CommonModule } from '@angular/common';
-import { ProductPageComponent } from '../product-page/product-page.component';
 import { PaginationComponent } from '@/shared/components/pagination/pagination.component';
+import { PaginationService } from '@/shared/components/pagination/pagination.service';
 
 
 @Component({
@@ -16,13 +16,18 @@ import { PaginationComponent } from '@/shared/components/pagination/pagination.c
 export class HomePageComponent {
   productService = inject(ProductService);
 
-  productsResource = rxResource({
-    request: ()=> ({}),
-    loader: (request) =>{
-      return  this.productService.getProduct({
+  paginatioService =inject(PaginationService);
 
+  productsResource = rxResource({
+    request: ()=> ({page: this.paginatioService.currentPage()-1}),
+    loader: ({request}) =>{
+      return  this.productService.getProduct({
+        offset: request.page * 9,
       });
 
     }
   });
+
+
+
 }

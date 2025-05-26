@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../products/services/products.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ProductCaruselComponent } from '@/products/components/product-carusel/product-carusel.component';
+import { PaginationService } from '@/shared/components/pagination/pagination.service';
 
 @Component({
   selector: 'app-product-page',
