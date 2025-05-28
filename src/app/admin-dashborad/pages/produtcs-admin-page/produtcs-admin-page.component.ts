@@ -1,10 +1,39 @@
 import { ProductTableComponent } from '@/admin-dashborad/components/product-table/product-table.component';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ProductService } from '@/products/services/products.service';
+import { PaginationComponent } from '@/shared/components/pagination/pagination.component';
+import { PaginationService } from '@/shared/components/pagination/pagination.service';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-produtcs-admin-page',
-  imports: [ProductTableComponent],
+  imports: [ProductTableComponent, PaginationComponent],
   templateUrl: './produtcs-admin-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProdutcsAdminPageComponent { }
+export class ProdutcsAdminPageComponent {
+
+  productService = inject(ProductService);
+  paginatioService =inject(PaginationService);
+
+
+  productsPerPage = signal(10);
+
+  productsResource = rxResource({
+    request: ()=> ({
+      page: this.paginatioService.currentPage()-1,
+      limit: this.productsPerPage()
+
+    }),
+    loader: ({request}) =>{
+      return  this.productService.getProduct({
+        offset: request.page * 9,
+        limit: request.limit,
+      });
+
+    }
+  });
+
+
+
+}

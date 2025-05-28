@@ -19,7 +19,7 @@ const baseUrl = environment.baseUrl;
       return  './assets/images/no-images.jpg'
     }
 
-      return ``
+      return `${baseUrl}/files/product/${image}`;
 
 
 

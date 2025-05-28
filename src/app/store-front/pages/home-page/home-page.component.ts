@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ProductService } from '@/products/services/products.service';
-  import { rxResource } from '@angular/core/rxjs-interop';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { ProductCardComponent } from '@/products/components/product-card/product-card.component';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '@/shared/components/pagination/pagination.component';
@@ -23,6 +23,7 @@ export class HomePageComponent {
     loader: ({request}) =>{
       return  this.productService.getProduct({
         offset: request.page * 9,
+
       });
 
     }
