@@ -1,1 +1,84 @@
-<p>register-page works!</p>,
+<form
+  class="card w-full max-w-sm shadow-xl bg-base-100 p-6 space-y-4"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+>
+  <h2 class="text-2xl font-bold text-center text-pastel-neutral">Crear Cuenta</h2>
+
+  <!-- Nombre completo -->
+  <label class="form-control w-full">
+    <div class="label">
+      <span class="label-text text-pastel-neutral">Nombre completo</span>
+    </div>
+    <label class="input input-bordered flex items-center gap-2 bg-pastel-yellow">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A7.962 7.962 0 0112 16c2.21 0 4.21.896 5.879 2.354M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <input
+        type="text"
+        class="grow"
+        placeholder="Tu nombre completo"
+        formControlName="name"
+      />
+    </label>
+  </label>
+
+  <!-- Email -->
+  <label class="form-control w-full">
+    <div class="label">
+      <span class="label-text text-pastel-neutral">Correo electrónico</span>
+    </div>
+    <label class="input input-bordered flex items-center gap-2 bg-pastel-blue">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+        <path d="M22 7 12 13 2 7"></path>
+      </svg>
+      <input
+        type="email"
+        class="grow"
+        placeholder="Correo electrónico"
+        formControlName="email"
+      />
+    </label>
+  </label>
+
+  <!-- Contraseña -->
+  <label class="form-control w-full">
+    <div class="label">
+      <span class="label-text text-pastel-neutral">Contraseña</span>
+    </div>
+    <label class="input input-bordered flex items-center gap-2 bg-pastel-pink">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M2.6 17.4A2 2 0 0 0 2 18.8V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.2a2 2 0 0 0 1.4-.6l.8-.8a6.5 6.5 0 1 0-4-4z"></path>
+        <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+      </svg>
+      <input
+        type="password"
+        class="grow"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+    </label>
+  </label>
+
+  <!-- Botón -->
+  <button class="btn btn-primary btn-block bg-pastel-green hover:bg-pastel-lime text-base-200">
+    Crear cuenta
+  </button>
+
+  <p>
+    ¿Ya tienes una cuenta?
+    <a routerLink="/auth/login" class="text-pastel-green">Inicia sesión</a>
+  </p>
+</form>
+
+@if(hasError()) {
+
+  <div role="alert" class="alert alert-error">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Error! Task failed successfully.</span>
+  </div>
+
+}

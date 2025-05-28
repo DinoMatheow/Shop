@@ -1,0 +1,72 @@
+<div class="bg-base-200 text-base-content w-screen h-screen overflow-y-scroll">
+  <div class="flex flex-col w-screen relative">
+    <div id="menu" class="bg-base-100 text-base-content w-64 fixed left-0 h-screen overflow-y-scroll shadow-md z-10">
+
+      <!-- Logo -->
+      <div id="logo" class="my-4 px-6">
+        <h1 class="text-lg md:text-2xl font-bold text-primary">
+          Dash<span class="text-secondary">8</span>.
+        </h1>
+        <p class="text-sm text-base-content/60">Manage your actions and activities</p>
+      </div>
+
+      <!-- Profile -->
+      <div id="profile" class="px-6 py-10">
+        <p class="text-base-content/60">Bienvenido,</p>
+        <a  class="inline-flex items-center gap-2">
+          <svg
+          class="w-6 h-6 text-black"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M12 12c2.7 0 4.5-1.8 4.5-4.5S14.7 3 12 3 7.5 4.8 7.5 7.5 9.3 12 12 12zm0 1.5c-3 0-9 1.5-9 4.5V21h18v-3c0-3-6-4.5-9-4.5z"/>
+        </svg>
+          <span class="font-bold text-base"> {{ user()?.fullName }} Matheow</span>
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <div id="nav" class="px-6 flex flex-col gap-2">
+        <a class="btn btn-ghost justify-start text-left gap-4">
+          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+          </svg>
+          <div class="flex flex-col">
+            <span class="font-bold text-base">Dashboard</span>
+            <span class="text-sm text-base-content/60 hidden md:block">Data Overview</span>
+          </div>
+        </a>
+
+        <!-- Copia este mismo patrón para el resto de ítems -->
+        <!-- Database, Cloud Storage, Reports, Security, Extensions, Settings -->
+        <a   routerLink="/admin/products" routerLinkActive="" class="btn btn-ghost justify-start text-left gap-4 w-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+          </svg>
+          <div class="flex flex-col min-w-0">
+            <span class="font-bold text-sm truncate">Productos</span>
+            <span class="text-xs text-base-content/60 hidden md:block truncate">
+              Listado de productos
+            </span>
+          </div>
+        </a>
+          <!-- menu -->
+          <div class="divider my-2"></div>
+          <button (click)="authService.logout()" class="btn btn-secondary">Cerrar Sesión</button>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="flex-1 ml-64 pt-5 px-5">
+    <router-outlet></router-outlet>
+  </div>
+
+
+</div>
