@@ -1,7 +1,10 @@
 <h1 class="text-2xl font-bold">{{ product().title }}</h1>
 <div class="divider"></div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<form
+[formGroup]="productForm"
+(ngSubmit)="onSumbit()"
+ class="grid grid-cols-1 sm:grid-cols-2 gap-4">
   <!-- Datos generales -->
   <div class="flex flex-col gap-2">
     <h2 class="text-2xl font-bold h-12">Datos generales</h2>
@@ -9,41 +12,84 @@
       type="text"
       placeholder="Título"
       class="input input-bordered w-full"
+      formControlName="title"
+      [class.border-red-500]="productForm.get('title')?.errors ?? false"
     />
+          <form-error-label [control]="productForm.get('title')!" ></form-error-label>
 
-    <input type="text" placeholder="Slug" class="input input-bordered w-full" />
+
+    <input type="text" placeholder="Slug" class="input input-bordered w-full"
+
+    [class.border-red-500]="productForm.get('slug')?.errors ?? false"
+    />
+          <form-error-label [control]="productForm.get('slug')!"></form-error-label>
 
     <textarea
       class="textarea textarea-bordered"
       placeholder="Descripción"
       rows="6"
+      formControlName="description"
+      [class.border-red-500]="productForm.get('description')?.errors ?? false"
     ></textarea>
+
+    <form-error-label [control]="productForm.get('description')!"></form-error-label>
+
 
     <h2 class="text-lg font-bold">Datos de venta</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-      <input
+
+      <div>
+
+        <input
         type="number"
         placeholder="Precio"
         class="input input-bordered w-full"
-      />
+        formControlName="price"
+        [class.border-red-500]="productForm.get('price')?.errors ?? false"
+        />
+        <form-error-label [control]="productForm.get('price')!"></form-error-label>
 
-      <input
+      </div>
+
+
+      <div>
+        <input
         type="number"
         placeholder="Inventario"
         class="input input-bordered w-full"
-      />
+        formControlName="stock"
+        [class.border-red-500]="productForm.get('stock')?.errors ?? false"
+        />
+        <form-error-label [control]="productForm.get('stock')!"></form-error-label>
+
+      </div>
+
+
+
+
+
     </div>
 
     <!-- tags -->
-    <input type="text" placeholder="Tags" class="input input-bordered w-full" />
+    <input type="text" placeholder="Tags" class="input input-bordered w-full"
+      formControlName="tags"
+
+    />
 
     <!-- Botones para el género -->
     <div class="grid grid-cols-3 gap-2">
       <!-- <button class="btn btn-sm btn-outline">Masculino</button> -->
-      <button class="btn btn-sm btn-primary">Masculino</button>
-      <button class="btn btn-sm btn-accent">Femenino</button>
-      <button class="btn btn-sm btn-secondary">Unisex</button>
+      <button  tyle="button" class="btn btn-sm" [class.btn-primary]="productForm.value.gender == 'men'"
+      (click)="productForm.patchValue({gender:'men'})">Masculino</button>
+      <button  tyle="button" class="btn btn-sm" [class.btn-secondary]="productForm.value.gender == 'women'"
+      (click)="productForm.patchValue({gender: 'women'})" >Femenino</button>
+      <button  tyle="button" class="btn btn-sm" [class.btn-accent]="productForm.value.gender == 'kid' "
+      (click)="productForm.patchValue({gender:'kid'})"
+      >Kid</button>
+      <button  tyle="button" class="btn btn-sm" [class.btn-warning]="productForm.value.gender == 'unisex'"
+      (click)="productForm.patchValue({gender:'unisex'})">Unisex</button>
+
     </div>
 
     <!-- <select class="select select-bordered w-full">
@@ -55,7 +101,9 @@
     <!-- Sizes -->
     <div class="grid grid-cols-6 gap-2">
       @for (size of sizes; track size) {
-      <button class="btn btn-sm btn-outline">{{ size }}</button>
+      <button class="btn btn-sm "  tyle="button" (click)="onSizeClicked(size)"
+      [class.btn-primary]="productForm.value.sizes?.includes(size)"
+      >{{ size }}</button>
       }
     </div>
   </div>
@@ -74,4 +122,4 @@
 
     <input type="file" class="file-input file-input-bordered w-full mt-4" />
   </div>
-</div>
+</form>
