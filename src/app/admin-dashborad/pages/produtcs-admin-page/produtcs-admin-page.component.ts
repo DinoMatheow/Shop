@@ -4,10 +4,11 @@ import { PaginationComponent } from '@/shared/components/pagination/pagination.c
 import { PaginationService } from '@/shared/components/pagination/pagination.service';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-produtcs-admin-page',
-  imports: [ProductTableComponent, PaginationComponent],
+  imports: [ProductTableComponent, PaginationComponent, RouterLink],
   templateUrl: './produtcs-admin-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
